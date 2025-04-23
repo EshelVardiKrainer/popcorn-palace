@@ -7,10 +7,14 @@ import com.att.tdp.popcorn_palace.model.Movie;
 
 @Service
 public class MovieService {
-    private final MovieRepository movieRepository;
+    private MovieRepository movieRepository;
 
-    public MovieService(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
+
+    public Movie addMovie(Movie movie) {
+       if (movieRepository.findByTitle(movie.getTitle()) != null) {
+            throw new IllegalArgumentException("Movie title already exists");
+        }
+        return movieRepository.save(movie);
     }
 
     public List<Movie> fetchAllMovies() {
