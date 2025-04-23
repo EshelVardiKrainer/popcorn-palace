@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import com.att.tdp.popcorn_palace.model.Tickets;
 
 @Repository
-public interface TicketsRepository extends JpaRepository<Tickets, Long> {
+public interface TicketRepository extends JpaRepository<Tickets, Long> {
     
     
 }
