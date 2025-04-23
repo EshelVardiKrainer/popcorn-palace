@@ -2,9 +2,11 @@ package com.att.tdp.popcorn_palace.model;
 import com.att.tdp.popcorn_palace.model.Showtime;
 import jakarta.persistence.Entity;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Tickets {
     private Long id;
     private Showtime showtime;
