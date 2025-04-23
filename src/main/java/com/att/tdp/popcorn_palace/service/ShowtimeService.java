@@ -20,4 +20,14 @@ public class ShowtimeService {
         return showtimeRepository.findById(showtimeId).get();
     }
 
+    public boolean deleteShowtime(Long showtimeId) {
+        // Check if the showtimeId is valid
+        if(!showtimeRepository.existsById(showtimeId)){
+            throw new IllegalArgumentException("Showtime ID not found");
+               
+        }
+        showtimeRepository.deleteById(showtimeId);
+        return true;
+    }
+
 }

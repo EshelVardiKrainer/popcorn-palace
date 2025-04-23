@@ -7,6 +7,6 @@ import com.att.tdp.popcorn_palace.model.Movie;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> { 
-
+    Movie findByTitle(String title); // Custom query method to find a movie by its title
     
 }

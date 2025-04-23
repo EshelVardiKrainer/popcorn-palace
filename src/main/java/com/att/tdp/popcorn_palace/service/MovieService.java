@@ -16,4 +16,13 @@ public class MovieService {
         return movieRepository.findAll();
     }
 
+    public boolean deleteMovie(String title) {
+        Movie movie = movieRepository.findByTitle(title);
+        if (movie == null) {
+            throw new IllegalArgumentException("Movie title not found");
+        }
+        movieRepository.deleteById(movie.getId());
+        return true;
+    }
+
 }
