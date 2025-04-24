@@ -20,9 +20,9 @@ public class Ticket {
     private Long customer_id;
 
     @NotNull(message = "Booking ID is required")
-    private Long booking_id;
+    private String booking_id;
 
-    public Ticket(Showtime showtime, int seat_number, Long customer_id, Long booking_id) {
+    public Ticket(Showtime showtime, int seat_number, Long customer_id, String booking_id) {
         this.showtime = showtime;
         this.seat_number = seat_number;
         this.customer_id = customer_id;
