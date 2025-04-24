@@ -33,6 +33,29 @@ public class ShowtimeService {
         return showtimeRepository.save(showtime);
     }
 
+    public Showtime updaShowtime(Showtime showtime, Long showtimeId) {
+        // Check if the showtimeId is valid
+        if(!showtimeRepository.existsById(showtimeId)){
+            throw new IllegalArgumentException("Showtime ID not found");
+               
+        }
+        // Check if the movie exists
+        if(movieRepository.findById(showtime.getMovie().getId()).isEmpty()){
+            throw new IllegalArgumentException("Movie is not found");
+        }
+       // Check if start time, end time and the time range are valid
+       if (!showtime.getStart_time().isBefore(showtime.getEnd_time())) {
+            throw new IllegalArgumentException("Start time must be before end time");
+        }
+        
+        // Check if the showtime overlaps with an existing showtime
+        if (existsByTheaterAndTime(showtime.getTheater(), showtime.getStart_time(), showtime.getEnd_time())) {
+            throw new IllegalArgumentException("Showtime overlaps with an existing showtime");
+        }
+    
+        return showtimeRepository.save(showtime);
+    }
+
     public Showtime fetchShowtimes(Long showtimeId) {
         // Check if the showtimeId is valid
         if(!showtimeRepository.existsById(showtimeId)){
