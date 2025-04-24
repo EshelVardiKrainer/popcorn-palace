@@ -1,6 +1,7 @@
 package com.att.tdp.popcorn_palace.model;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +15,8 @@ public class Ticket {
     private Showtime showtime;
 
     @NotNull(message = "Seat number is required")
-    private int seat_number;
+    @Positive(message = "Seat number must be a positive number")
+    private Integer seat_number;
 
     @NotNull(message = "Customer ID is required")
     private Long customer_id;
@@ -22,7 +24,7 @@ public class Ticket {
     @NotNull(message = "Booking ID is required")
     private String booking_id;
 
-    public Ticket(Showtime showtime, int seat_number, Long customer_id, String booking_id) {
+    public Ticket(Showtime showtime, Integer seat_number, Long customer_id, String booking_id) {
         this.showtime = showtime;
         this.seat_number = seat_number;
         this.customer_id = customer_id;
