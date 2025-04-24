@@ -13,15 +13,15 @@ import lombok.NoArgsConstructor;
 public class ShowtimeDTO {
     private Long id;
 
+    @NotNull(message = "Price is required")
+    @PositiveOrZero(message = "Price must be non-negative")
+    private Double price;
+
     @NotNull(message = "Movie ID is required")
     private Long movieId;
 
     @NotNull(message = "Theater is required")
     private String theater;
-
-    @NotNull(message = "Price is required")
-    @PositiveOrZero(message = "Price must be non-negative")
-    private Double price;
 
     @NotNull(message = "Start time is required")
     private Instant startTime;
