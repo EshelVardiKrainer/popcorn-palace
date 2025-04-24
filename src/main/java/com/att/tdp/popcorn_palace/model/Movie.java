@@ -18,7 +18,7 @@ public class Movie {
     private String genre;
 
     @NotNull(message = "Duration is required")
-    private String duration;
+    private Integer duration;
     
     @NotNull(message = "Rating is required")
     private Double rating;
