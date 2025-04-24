@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Tickets {
+public class Ticket {
     private Long id;
 
     @NotNull(message = "Showtime is required")
@@ -22,7 +22,7 @@ public class Tickets {
     @NotNull(message = "Booking ID is required")
     private Long booking_id;
 
-    public Tickets(Showtime showtime, int seat_number, Long customer_id, Long booking_id) {
+    public Ticket(Showtime showtime, int seat_number, Long customer_id, Long booking_id) {
         this.showtime = showtime;
         this.seat_number = seat_number;
         this.customer_id = customer_id;
