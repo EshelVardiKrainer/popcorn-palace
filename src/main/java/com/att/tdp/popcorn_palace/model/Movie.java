@@ -24,10 +24,10 @@ public class Movie {
     private String rating;
 
     @NotNull(message = "Release year is required")
-    private String release_year;
+    private Integer release_year;
 
 
-    public Movie(String title, String genre, String duration, String rating, String release_year) {
+    public Movie(String title, String genre, String duration, Double rating, Integer release_year) {
         this.title = title;
         this.genre = genre;
         this.duration = duration;
