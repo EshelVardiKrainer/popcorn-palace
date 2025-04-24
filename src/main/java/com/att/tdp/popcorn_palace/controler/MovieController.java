@@ -41,8 +41,8 @@ public class MovieController {
     }
 
     @PostMapping("/update/{movieTitle}")
-    public ResponseEntity<Movie> updateMovie(Movie updatedMovie, String movieTitle) {
-        Movie movie = movieService.updateMovie(updatedMovie, movieTitle);
+    public ResponseEntity<Movie> updateMovie(MovieDTO updatedMovie, String movieTitle) {
+        Movie movie = movieService.updateMovie(new Movie(updatedMovie.getTitle(), updatedMovie.getGenre(), updatedMovie.getDuration().toString(), updatedMovie.getRating(), updatedMovie.getRelease_year()), movieTitle);
         return ResponseEntity.ok(movie);
     }
 
