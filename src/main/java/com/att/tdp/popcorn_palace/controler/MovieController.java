@@ -35,8 +35,8 @@ public class MovieController {
     }
 
     @PostMapping
-    public ResponseEntity<Movie> addMovie(Movie movie) {
-        Movie addedMovie = movieService.addMovie(movie);
+    public ResponseEntity<Movie> addMovie(MovieDTO movieDTO) {
+        Movie addedMovie = movieService.addMovie(new Movie(movieDTO.getTitle(), movieDTO.getGenre(), movieDTO.getDuration().toString(), movieDTO.getRating(), movieDTO.getRelease_year()));
         return ResponseEntity.ok(addedMovie);
     }
 
