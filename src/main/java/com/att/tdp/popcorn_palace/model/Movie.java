@@ -1,6 +1,7 @@
 package com.att.tdp.popcorn_palace.model;
 
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,10 +10,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Movie {
     private Long id;
+
+    @NotNull(message = "Title is required")
     private String title;
+
+    @NotNull(message = "Genre is required")
     private String genre;
+
+    @NotNull(message = "Duration is required")
     private String duration;
+    
+    @NotNull(message = "Rating is required")
     private String rating;
+
+    @NotNull(message = "Release year is required")
     private String release_year;
 
 

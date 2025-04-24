@@ -1,6 +1,6 @@
 package com.att.tdp.popcorn_palace.model;
-import com.att.tdp.popcorn_palace.model.Showtime;
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,9 +9,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Tickets {
     private Long id;
+
+    @NotNull(message = "Showtime is required")
     private Showtime showtime;
+
+    @NotNull(message = "Seat number is required")
     private int seat_number;
+
+    @NotNull(message = "Customer ID is required")
     private Long customer_id;
+
+    @NotNull(message = "Booking ID is required")
     private Long booking_id;
 
     public Tickets(Showtime showtime, int seat_number, Long customer_id, Long booking_id) {
