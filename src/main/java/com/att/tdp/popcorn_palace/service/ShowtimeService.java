@@ -56,7 +56,7 @@ public class ShowtimeService {
         return showtimeRepository.save(showtime);
     }
 
-    public Showtime fetchShowtimes(Long showtimeId) {
+    public Showtime fetchShowtimeByID(Long showtimeId) {
         // Check if the showtimeId is valid
         if(!showtimeRepository.existsById(showtimeId)){
             throw new IllegalArgumentException("Showtime ID not found");
