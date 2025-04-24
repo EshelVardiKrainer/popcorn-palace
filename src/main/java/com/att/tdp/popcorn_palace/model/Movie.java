@@ -21,7 +21,7 @@ public class Movie {
     private String duration;
     
     @NotNull(message = "Rating is required")
-    private String rating;
+    private Double rating;
 
     @NotNull(message = "Release year is required")
     private Integer release_year;
