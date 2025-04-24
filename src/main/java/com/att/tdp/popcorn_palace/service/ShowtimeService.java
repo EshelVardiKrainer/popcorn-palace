@@ -33,7 +33,7 @@ public class ShowtimeService {
         return showtimeRepository.save(showtime);
     }
 
-    public Showtime updaShowtime(Showtime showtime, Long showtimeId) {
+    public Showtime updateShowtime(Showtime showtime, Long showtimeId) {
         // Check if the showtimeId is valid
         if(!showtimeRepository.existsById(showtimeId)){
             throw new IllegalArgumentException("Showtime ID not found");

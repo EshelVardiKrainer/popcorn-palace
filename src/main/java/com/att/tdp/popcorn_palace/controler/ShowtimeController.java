@@ -7,29 +7,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.http.ResponseEntity;
+
+import com.att.tdp.popcorn_palace.dto.ShowtimeDTO;
+import com.att.tdp.popcorn_palace.mapper.ShowtimeMapper;
 import com.att.tdp.popcorn_palace.model.Showtime;
 
 @RestController
 @RequestMapping("/showtimes")
 public class ShowtimeController {
     private ShowtimeService showtimeService;
+    private ShowtimeMapper showtimeMapper;
    
     @GetMapping("{showtimeId}")
-    public ResponseEntity<Showtime> getShowtimeById(@PathVariable Long showtimeId) {
+    public ResponseEntity<ShowtimeDTO> getShowtimeById(@PathVariable Long showtimeId) {
         Showtime showtime = showtimeService.fetchShowtimeByID(showtimeId);
-        return ResponseEntity.ok(showtime);
+        ShowtimeDTO showtimeDTO = showtimeMapper.toDTO(showtime);
+        return ResponseEntity.ok(showtimeDTO);
     }
 
     @PostMapping
-    public ResponseEntity<Showtime> addShowtime(Showtime showtime) {
+    public ResponseEntity<Showtime> addShowtime(ShowtimeDTO showtimeDTO) {
+        Showtime showtime = showtimeMapper.fromDTO(showtimeDTO);
         Showtime addedShowtime = showtimeService.addShowtime(showtime);
         return ResponseEntity.ok(addedShowtime);
     }
 
     @PostMapping("/update/{showtimeId}")
-    public ResponseEntity<Showtime> updateShowtime(Showtime updatedShowtime, @PathVariable Long showtimeId) {
-        Showtime showtime = showtimeService.updaShowtime(updatedShowtime, showtimeId);
-        return ResponseEntity.ok(showtime);
+    public ResponseEntity<Showtime> updateShowtime(ShowtimeDTO updatedShowtimeDTO, @PathVariable Long showtimeId) {
+        Showtime updatedShowtime = showtimeMapper.fromDTO(updatedShowtimeDTO);
+        showtimeService.updateShowtime(updatedShowtime, showtimeId);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{showtimeId}")
