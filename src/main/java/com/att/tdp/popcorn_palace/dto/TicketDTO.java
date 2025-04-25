@@ -1,4 +1,6 @@
 package com.att.tdp.popcorn_palace.dto;
+import java.util.UUID;
+
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +19,5 @@ public class TicketDTO {
     private Integer seatNumber;
 
     @NotNull(message = "User ID is required")
-    @Positive(message = "User ID must be a positive number")
-    private Long customer_id;
+    private UUID customer_id;
 }
