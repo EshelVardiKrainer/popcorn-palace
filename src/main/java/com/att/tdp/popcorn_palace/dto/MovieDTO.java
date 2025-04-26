@@ -33,6 +33,6 @@ public class MovieDTO {
     @NotNull(message = "Release year is required")
     @Min(value = 1900, message = "Release year must be at least 1900")
     @Max(value = 2030, message = "Release year must be at most 2030")
-    private Integer release_year;
+    private Integer releaseYear;
 
 }
