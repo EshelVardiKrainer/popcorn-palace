@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.att.tdp.popcorn_palace.exceptions.ApiError;
 
-/**
- * Catches application-specific exceptions and turns them
- * into JSON responses with a status, timestamp and message.
- */
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 

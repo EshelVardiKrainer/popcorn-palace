@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.att.tdp.popcorn_palace.dto.ShowtimeDTO;
+import com.att.tdp.popcorn_palace.exceptions.MovieNotFoundException;
 import com.att.tdp.popcorn_palace.model.Movie;
 
 @Component
@@ -35,7 +36,7 @@ public class ShowtimeMapper {
         Movie showtimeMovie = movieService.getMovieById(showtimeDTO.getMovieId());
         System.out.println("Movie: " + showtimeMovie);
         if (showtimeMovie == null) {
-            throw new IllegalArgumentException("Movie not found with ID: " + showtimeDTO.getMovieId());
+            throw new MovieNotFoundException("Movie not found with ID: " + showtimeDTO.getMovieId());
         }
         Showtime showtime = new Showtime();
         showtime.setTheater(showtimeDTO.getTheater());

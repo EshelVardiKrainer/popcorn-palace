@@ -14,7 +14,7 @@ spring:
     database: POSTGRESQL
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
   sql:
     init:
       mode: always

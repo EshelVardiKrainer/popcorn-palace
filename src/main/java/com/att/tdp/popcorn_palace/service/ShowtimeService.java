@@ -2,6 +2,7 @@ package com.att.tdp.popcorn_palace.service;
 import java.time.Instant;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.BeanUtils;
 
 import com.att.tdp.popcorn_palace.exceptions.MovieNotFoundException;
 import com.att.tdp.popcorn_palace.exceptions.ShowtimeNotFoundException;
@@ -25,14 +26,10 @@ public class ShowtimeService {
             throw new MovieNotFoundException(showtime.getMovie().getTitle());
         }
        // Check if start time, end time and the time range are valid
-       if (!showtime.getStart_time().isBefore(showtime.getEnd_time())) {
-            throw new IllegalArgumentException("Start time must be before end time");
-        }
+       isValidTimeRange(showtime.getStart_time(), showtime.getEnd_time());
         
         // Check if the showtime overlaps with an existing showtime
-        if (existsByTheaterAndTime(showtime.getTheater(), showtime.getStart_time(), showtime.getEnd_time())) {
-            throw new ShowtimeOverlapException(showtime.getTheater(), showtime.getStart_time().toString(), showtime.getEnd_time().toString());
-        }
+       isOverLapping(showtime);
     
         return showtimeRepository.save(showtime);
     }
@@ -49,29 +46,14 @@ public class ShowtimeService {
                            new MovieNotFoundException(showtime.getMovie().getTitle()));
     
         // 3. Validate time range
-        if (!showtime.getStart_time().isBefore(showtime.getEnd_time())) {
-            throw new IllegalArgumentException("Start time must be before end time");
-        }
+        isValidTimeRange(showtime.getStart_time(), showtime.getEnd_time());
     
         // 4. Check for overlap in the same theatre
-        if (existsByTheaterAndTime(
-                showtime.getTheater(),
-                showtime.getStart_time(),
-                showtime.getEnd_time())) {
-    
-            throw new ShowtimeOverlapException(
-                    showtime.getTheater(),
-                    showtime.getStart_time().toString(),
-                    showtime.getEnd_time().toString());
-        }
+        isOverLapping(showtime);
     
         // 5. Apply updates and persist
         Showtime existing = showtimeRepository.findById(showtimeId).get();
-        existing.setMovie(showtime.getMovie());
-        existing.setTheater(showtime.getTheater());
-        existing.setStart_time(showtime.getStart_time());
-        existing.setEnd_time(showtime.getEnd_time());
-        existing.setPrice(showtime.getPrice());
+        BeanUtils.copyProperties(showtimeRepository, showtime, "id");
     
         return showtimeRepository.save(existing);
     }
@@ -113,6 +95,26 @@ public class ShowtimeService {
             return true;
         }
         return false;
+    }
+
+    private void isValidTimeRange(Instant start_time, Instant end_time) {
+        if (!start_time.isBefore(end_time)) {
+            throw new IllegalArgumentException("Start time must be before end time");
+        }
+    }
+
+    private void isOverLapping(Showtime showtime) {
+        if (existsByTheaterAndTime(
+            showtime.getTheater(),
+            showtime.getStart_time(),
+            showtime.getEnd_time())) {
+
+        throw new ShowtimeOverlapException(
+                showtime.getTheater(),
+                showtime.getStart_time().toString(),
+                showtime.getEnd_time().toString());
+    }
+        
     }
 
 }

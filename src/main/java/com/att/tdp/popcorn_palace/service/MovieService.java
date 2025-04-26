@@ -1,6 +1,6 @@
 package com.att.tdp.popcorn_palace.service;
 
-import lombok.RequiredArgsConstructor;      // ✨ add
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import com.att.tdp.popcorn_palace.repository.MovieRepository;
@@ -11,10 +11,10 @@ import com.att.tdp.popcorn_palace.model.Movie;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor                 // ✨ generates a constructor for all final fields
+@RequiredArgsConstructor 
 public class MovieService {
 
-    private final MovieRepository movieRepository;   // ✨ make it final and let Spring inject it
+    private final MovieRepository movieRepository;
 
     public Movie addMovie(Movie movie) {
         System.out.println("Adding movie: " + movie);

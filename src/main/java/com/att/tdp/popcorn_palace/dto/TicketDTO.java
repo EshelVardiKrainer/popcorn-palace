@@ -22,5 +22,5 @@ public class TicketDTO {
 
     @NotNull(message = "User ID is required")
     @JsonProperty("userId") 
-    private UUID customer_id; // Keep Java field name as customer_id
+    private UUID customer_id;
 }
