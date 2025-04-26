@@ -1,4 +1,6 @@
 package com.att.tdp.popcorn_palace.model;
+import java.util.UUID;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,15 +31,15 @@ public class Ticket {
     private Integer seat_number;
 
     @NotNull(message = "Customer ID is required")
-    private Long customer_id;
+    private UUID customer_id;
 
     @NotNull(message = "Booking ID is required")
-    private String booking_id;
+    private UUID booking_id;
 
-    public Ticket(Showtime showtime, Integer seat_number, Long customer_id, String booking_id) {
+    public Ticket(Showtime showtime, Integer seat_number, UUID customer_id) {
         this.showtime = showtime;
         this.seat_number = seat_number;
         this.customer_id = customer_id;
-        this.booking_id = booking_id;
+        this.booking_id = UUID.randomUUID();
     }
 }
