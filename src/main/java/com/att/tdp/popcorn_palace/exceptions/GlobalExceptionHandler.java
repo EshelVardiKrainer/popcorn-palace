@@ -2,11 +2,13 @@ package com.att.tdp.popcorn_palace.exceptions;
 
 import java.time.Instant;
 import java.util.Map;
+import com.att.tdp.popcorn_palace.exceptions.ShowtimeOverlapException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import com.att.tdp.popcorn_palace.exceptions.ApiError;
 
 /**
  * Catches application-specific exceptions and turns them
@@ -29,6 +31,16 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(body);
     }
 
+    private ResponseEntity<ApiError> buildError(HttpStatus status, Exception ex) {
+        ApiError apiError = new ApiError(
+            Instant.now(),
+            status.value(),
+            status.getReasonPhrase(),
+            ex.getMessage()
+        );
+        return ResponseEntity.status(status).body(apiError);
+    }
+
     @ExceptionHandler(MovieNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleMovieNotFound(
             MovieNotFoundException ex) {
@@ -42,4 +54,15 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
     }
+
+    @ExceptionHandler(ShowtimeNotFoundException.class)
+    public ResponseEntity<ApiError> handleShowtimeNotFound(ShowtimeNotFoundException ex) {
+        return buildError(HttpStatus.NOT_FOUND, ex);
+    }
+
+    @ExceptionHandler(ShowtimeOverlapException.class)
+    public ResponseEntity<ApiError> handleShowtimeOverlap(ShowtimeOverlapException ex) {
+        return buildError(HttpStatus.CONFLICT, ex);
+    }
+
 }

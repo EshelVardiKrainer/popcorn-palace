@@ -1,4 +1,18 @@
 services:
+  popcorn-palace:
+    build: .
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/popcorn-palace
+      SPRING_DATASOURCE_USERNAME: popcorn-palace
+      SPRING_DATASOURCE_PASSWORD: popcorn-palace
+    ports:
+      - target: 8080
+        published: 8080
+        protocol: tcp
+    depends_on:
+      - db
+
   db:
     image: postgres
     restart: always
@@ -14,3 +28,5 @@ services:
       - target: 5432
         published: 5432
         protocol: tcp
+
+  

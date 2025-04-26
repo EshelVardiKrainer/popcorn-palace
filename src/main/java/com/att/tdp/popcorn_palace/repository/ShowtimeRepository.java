@@ -7,6 +7,6 @@ import com.att.tdp.popcorn_palace.model.Showtime;
 
 @Repository
 public interface ShowtimeRepository extends JpaRepository<Showtime, Long> {
-    List <Showtime> findByTheater(String theater); // Custom query method to find showtimes by theater
+    List <Showtime> findByTheater(String theater);
     
 }

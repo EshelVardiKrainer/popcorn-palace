@@ -2,12 +2,16 @@ package com.att.tdp.popcorn_palace.model;
 import java.time.Instant;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.JoinColumn;
+
 
 
 
@@ -18,7 +22,9 @@ public class Showtime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    @ManyToOne
+    @JoinColumn(name = "movie_id", nullable = false)
     @NotNull(message = "Movie is required")
     private Movie movie;
 

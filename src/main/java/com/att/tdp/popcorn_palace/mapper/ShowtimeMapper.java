@@ -1,10 +1,16 @@
 package com.att.tdp.popcorn_palace.mapper;
 import com.att.tdp.popcorn_palace.model.Showtime;
 import com.att.tdp.popcorn_palace.service.MovieService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.att.tdp.popcorn_palace.dto.ShowtimeDTO;
 import com.att.tdp.popcorn_palace.model.Movie;
 
+@Component
 public class ShowtimeMapper {
+    @Autowired
     private MovieService movieService;
     
     public ShowtimeDTO toDTO(Showtime showtime){
@@ -25,16 +31,21 @@ public class ShowtimeMapper {
         if (showtimeDTO == null) {
             return null;
         }
+        System.out.println("ShowtimeDTO: " + showtimeDTO);
         Movie showtimeMovie = movieService.getMovieById(showtimeDTO.getMovieId());
+        System.out.println("Movie: " + showtimeMovie);
         if (showtimeMovie == null) {
             throw new IllegalArgumentException("Movie not found with ID: " + showtimeDTO.getMovieId());
         }
         Showtime showtime = new Showtime();
-        showtime.setId(showtimeDTO.getId());
         showtime.setTheater(showtimeDTO.getTheater());
         showtime.setPrice(showtimeDTO.getPrice());
         showtime.setStart_time(showtimeDTO.getStartTime());
         showtime.setEnd_time(showtimeDTO.getEndTime());
+        showtime.setMovie(showtimeMovie);
+        showtime.setId(showtimeDTO.getId());
+
+        System.out.println("Showtime: " + showtime);
         return showtime;
     }
 
