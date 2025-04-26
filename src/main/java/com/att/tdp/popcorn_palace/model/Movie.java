@@ -32,7 +32,7 @@ public class Movie {
     private Integer release_year;
 
 
-    public Movie(String title, String genre, String duration, Double rating, Integer release_year) {
+    public Movie(String title, String genre, Integer duration, Double rating, Integer release_year) {
         this.title = title;
         this.genre = genre;
         this.duration = duration;
