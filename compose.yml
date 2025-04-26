@@ -1,32 +1,35 @@
+# Docker Compose configuration for Popcorn Palace
+
 services:
+  # Application Service
   popcorn-palace:
-    build: .
-    restart: always
+    build: . # Build the image from the Dockerfile in the current directory
+    restart: always # Always restart the container if it stops
     environment:
+      # Database connection URL - uses the service name 'db' and internal port 5432
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/popcorn-palace
       SPRING_DATASOURCE_USERNAME: popcorn-palace
       SPRING_DATASOURCE_PASSWORD: popcorn-palace
     ports:
-      - target: 8080
-        published: 8080
+      - target: 8080 # Internal port the Spring Boot app runs on
+        published: 8080 # External port exposed on the host machine
         protocol: tcp
     depends_on:
-      - db
+      - db # Ensure the 'db' service starts before this service
 
+  # Database Service
   db:
-    image: postgres
-    restart: always
+    image: postgres # Use the official PostgreSQL image
+    restart: always # Always restart the container if it stops
     environment:
-      POSTGRES_USER: popcorn-palace
-      POSTGRES_PASSWORD: popcorn-palace
-      POSTGRES_DB: popcorn-palace
-  #  volumes:
-   #   - type: bind
-   #     source: ./data
-   #     target: /var/lib/postgresql/data --> in case u need to save data to local storage
+      POSTGRES_USER: popcorn-palace # Database username
+      POSTGRES_PASSWORD: popcorn-palace # Database password
+      POSTGRES_DB: popcorn-palace # Database name
+    # volumes: # Uncomment if you need persistent data storage
+    #   - type: bind
+    #     source: ./data # Local directory to store data
+    #     target: /var/lib/postgresql/data # Standard PostgreSQL data directory inside the container
     ports:
-      - target: 5432
-        published: 5432
+      - target: 5432 # Internal port PostgreSQL listens on inside the container
+        published: 5433 # <<< CHANGED: External port exposed on the host machine (changed from 5432)
         protocol: tcp
-
-  

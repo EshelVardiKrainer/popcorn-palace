@@ -1,5 +1,7 @@
 package com.att.tdp.popcorn_palace.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -33,6 +35,7 @@ public class MovieDTO {
     @NotNull(message = "Release year is required")
     @Min(value = 1900, message = "Release year must be at least 1900")
     @Max(value = 2030, message = "Release year must be at most 2030")
-    private Integer releaseYear;
+    @JsonProperty("releaseYear")
+    private Integer release_year;
 
 }

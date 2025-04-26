@@ -48,6 +48,7 @@ public class MovieController {
                                         @RequestBody MovieDTO movieDTO) {
         Movie added = movieMapper.fromDTO(movieDTO);
         added = movieService.addMovie(added);
+        System.out.println("Movie object after mapping: " + added);
         return ResponseEntity.ok(added);
     }
 
