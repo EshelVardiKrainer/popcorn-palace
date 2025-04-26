@@ -37,13 +37,13 @@ public class MovieController {
 
     @PostMapping
     public ResponseEntity<Movie> addMovie(MovieDTO movieDTO) {
-        Movie addedMovie = movieService.addMovie(new Movie(movieDTO.getTitle(), movieDTO.getGenre(), movieDTO.getDuration().toString(), movieDTO.getRating(), movieDTO.getRelease_year()));
+        Movie addedMovie = movieService.addMovie(new Movie(movieDTO.getTitle(), movieDTO.getGenre(), movieDTO.getDuration(), movieDTO.getRating(), movieDTO.getRelease_year()));
         return ResponseEntity.ok(addedMovie);
     }
 
     @PostMapping("/update/{movieTitle}")
     public ResponseEntity<Movie> updateMovie(MovieDTO updatedMovie, String movieTitle) {
-        Movie movie = movieService.updateMovie(new Movie(updatedMovie.getTitle(), updatedMovie.getGenre(), updatedMovie.getDuration().toString(), updatedMovie.getRating(), updatedMovie.getRelease_year()), movieTitle);
+        Movie movie = movieService.updateMovie(new Movie(updatedMovie.getTitle(), updatedMovie.getGenre(), updatedMovie.getDuration(), updatedMovie.getRating(), updatedMovie.getRelease_year()), movieTitle);
         return ResponseEntity.ok(movie);
     }
 
