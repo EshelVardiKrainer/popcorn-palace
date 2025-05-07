@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MovieDTO {
-    private Long id;
 
     @NotNull(message = "Title is required")
     private String title;
@@ -24,15 +23,15 @@ public class MovieDTO {
     private String genre;
     
     @Positive(message = "Duration must be a positive number")
-    private int duration;
+    private Integer duration;
 
     @Min(value = 0, message = "Rating must be at least 0")
     @Max(value = 10, message = "Rating must be at most 10")
-    private double rating;
+    private Double rating;
 
     @Min(value = 1900, message = "Release year must be at least 1900")
     @Max(value = 2030, message = "Release year must be at most 2030")
     @JsonProperty("releaseYear")
-    private int release_year;
+    private Integer release_year;
 
 }
