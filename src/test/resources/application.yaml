@@ -12,6 +12,7 @@ spring:
   sql:
     init:
       platform: postgresql
+      mode: embedded # Explicitly set mode to embedded
   h2:
     console:
       enabled: true
@@ -19,4 +20,4 @@ spring:
     database: POSTGRESQL
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none # Changed from 'update' to 'none'
