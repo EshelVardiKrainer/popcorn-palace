@@ -14,9 +14,11 @@ public class MovieDTOTests {
         assertNull(movie.getId());
         assertNull(movie.getTitle());
         assertNull(movie.getGenre());
-        assertNull(movie.getDuration());
-        assertNull(movie.getRating());
-        assertNull(movie.getRelease_year());
+        // Assuming duration and release_year are int (default 0) and rating is double (default 0.0).
+        // Primitive types cannot be null.
+        assertEquals(0, movie.getDuration()); // Changed from assertNull(movie.getDuration());
+        assertEquals(0.0, movie.getRating());  // Changed from assertNull(movie.getRating());
+        assertEquals(0, movie.getRelease_year()); // Changed from assertNull(movie.getRelease_year());
 
         // Test setters and getters for defined fields
         movie.setId(1L);

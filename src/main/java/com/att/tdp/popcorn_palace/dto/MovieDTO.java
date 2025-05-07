@@ -23,19 +23,16 @@ public class MovieDTO {
     @NotNull(message = "Genre is required")
     private String genre;
     
-    @NotNull(message = "Duration is required")
     @Positive(message = "Duration must be a positive number")
-    private Integer duration;
+    private int duration;
 
-    @NotNull(message = "Rating is required")
     @Min(value = 0, message = "Rating must be at least 0")
     @Max(value = 10, message = "Rating must be at most 10")
-    private Double rating;
+    private double rating;
 
-    @NotNull(message = "Release year is required")
     @Min(value = 1900, message = "Release year must be at least 1900")
     @Max(value = 2030, message = "Release year must be at most 2030")
     @JsonProperty("releaseYear")
-    private Integer release_year;
+    private int release_year;
 
 }
