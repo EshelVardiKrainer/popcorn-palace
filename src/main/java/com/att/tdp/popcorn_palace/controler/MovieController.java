@@ -53,7 +53,7 @@ public class MovieController {
     }
 
     @PostMapping("/update/{movieTitle}")
-    public ResponseEntity<Movie> updateMovie(@RequestBody MovieDTO updatedMovie, @PathVariable String movieTitle) {
+    public ResponseEntity<Movie> updateMovie(@Valid @RequestBody MovieDTO updatedMovie, @PathVariable String movieTitle) {
         Movie movie = movieMapper.fromDTO(updatedMovie);
         movie = movieService.updateMovie(movie, movieTitle);
         return ResponseEntity.ok(movie);
