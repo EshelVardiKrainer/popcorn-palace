@@ -62,4 +62,14 @@ public class GlobalExceptionHandler {
         return buildError(HttpStatus.CONFLICT, ex);
     }
 
+    @ExceptionHandler(jakarta.persistence.EntityNotFoundException.class)
+    public ResponseEntity<ApiError> handleEntityNotFound(jakarta.persistence.EntityNotFoundException ex) {
+        return buildError(HttpStatus.NOT_FOUND, ex);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ApiError> handleIllegalArgument(IllegalArgumentException ex) {
+        return buildError(HttpStatus.BAD_REQUEST, ex);
+    }
+
 }

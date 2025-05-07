@@ -37,7 +37,7 @@ public class TicketController {
         // Create the response map
         Map<String, String> response = new HashMap<>();
         // Convert UUID to String for the JSON response
-        response.put("bookingId", bookedTicket.getBooking_id().toString()); // <-- Added .toString()
+        response.put("bookingId", bookedTicket.getBooking_id().toString());
 
         return ResponseEntity.ok(response);
     }
