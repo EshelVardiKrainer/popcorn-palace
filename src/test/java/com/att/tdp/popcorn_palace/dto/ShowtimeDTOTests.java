@@ -12,7 +12,6 @@ public class ShowtimeDTOTests {
         ShowtimeDTO showtimeDTO = new ShowtimeDTO();
 
         // Test default values
-        assertNull(showtimeDTO.getId());
         assertNull(showtimeDTO.getPrice());
         assertNull(showtimeDTO.getMovieId());
         assertNull(showtimeDTO.getTheater());
@@ -20,9 +19,6 @@ public class ShowtimeDTOTests {
         assertNull(showtimeDTO.getEndTime());
 
         // Test setters and getters
-        showtimeDTO.setId(1L);
-        assertEquals(1L, showtimeDTO.getId());
-
         showtimeDTO.setPrice(15.99);
         assertEquals(15.99, showtimeDTO.getPrice());
 
@@ -43,16 +39,15 @@ public class ShowtimeDTOTests {
 
     @Test
     public void testAllArgsConstructor() {
-        Long id = 2L;
         Double price = 12.50;
         Long movieId = 202L;
         String theater = "Theater B";
         Instant startTime = Instant.parse("2024-01-01T10:00:00Z");
         Instant endTime = Instant.parse("2024-01-01T12:30:00Z");
 
-        ShowtimeDTO showtimeDTO = new ShowtimeDTO(id, price, movieId, theater, startTime, endTime);
+        ShowtimeDTO showtimeDTO = new ShowtimeDTO(movieId, theater, price, startTime, endTime);
 
-        assertEquals(id, showtimeDTO.getId());
+
         assertEquals(price, showtimeDTO.getPrice());
         assertEquals(movieId, showtimeDTO.getMovieId());
         assertEquals(theater, showtimeDTO.getTheater());
