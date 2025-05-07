@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShowtimeDTO {
+    private Long id;
 
     @NotNull(message = "Movie ID is required")
     private Long movieId;
