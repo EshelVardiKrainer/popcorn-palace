@@ -3,11 +3,9 @@ package com.att.tdp.popcorn_palace.mapper;
 import com.att.tdp.popcorn_palace.dto.MovieDTO;
 import com.att.tdp.popcorn_palace.model.Movie;
 
-import org.checkerframework.checker.units.qual.m;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
