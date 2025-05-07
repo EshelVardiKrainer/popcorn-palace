@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.ResponseEntity;
+import jakarta.validation.Valid;
 
 import com.att.tdp.popcorn_palace.dto.ShowtimeDTO;
 import com.att.tdp.popcorn_palace.mapper.ShowtimeMapper;
@@ -31,17 +32,18 @@ public class ShowtimeController {
     }
 
     @PostMapping
-    public ResponseEntity<Showtime> addShowtime(@RequestBody ShowtimeDTO showtimeDTO) {
+    public ResponseEntity<Showtime> addShowtime(@Valid @RequestBody ShowtimeDTO showtimeDTO) {
         Showtime showtime = showtimeMapper.fromDTO(showtimeDTO);
         Showtime addedShowtime = showtimeService.addShowtime(showtime);
         return ResponseEntity.ok(addedShowtime);
     }
 
     @PostMapping("/update/{showtimeId}")
-    public ResponseEntity<Showtime> updateShowtime(@RequestBody ShowtimeDTO updatedShowtimeDTO, @PathVariable Long showtimeId) {
+    public ResponseEntity<Showtime> updateShowtime(@Valid @RequestBody ShowtimeDTO updatedShowtimeDTO, @PathVariable Long showtimeId) {
         Showtime updatedShowtime = showtimeMapper.fromDTO(updatedShowtimeDTO);
         showtimeService.updateShowtime(updatedShowtime, showtimeId);
-        return ResponseEntity.ok().build();
+        Showtime returnedShowtime = showtimeService.fetchShowtimeByID(showtimeId);
+        return ResponseEntity.ok(returnedShowtime);
     }
 
     @DeleteMapping("/{showtimeId}")
