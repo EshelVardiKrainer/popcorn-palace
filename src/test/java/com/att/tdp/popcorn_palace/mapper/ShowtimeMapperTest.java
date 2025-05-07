@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
 import java.time.Instant;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,16 +19,11 @@ class ShowtimeMapperTest {
         Movie movie = new Movie();
         movie.setId(1L);
         movie.setTitle("Inception");
-        movie.setDirector("Christopher Nolan");
         movie.setGenre("Sci-Fi");
-        movie.setReleaseDate(new Date()); // Assuming Movie has these fields based on MovieMapperTest
-        movie.setDurationMin(148);
+        movie.setDuration(148);
         movie.setRating(8.8);
-        movie.setPlotSummary("Plot summary");
-        movie.setLanguage("English");
-        movie.setCountry("USA");
-        movie.setPosterImageUrl("url");
-        movie.setTrailerUrl("url");
+        movie.setRelease_year(2010);
+        
 
         Instant startTime = Instant.now();
         Instant endTime = startTime.plusSeconds(7200); // 2 hours later

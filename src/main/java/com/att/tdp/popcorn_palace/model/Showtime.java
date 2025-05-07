@@ -1,29 +1,37 @@
 package com.att.tdp.popcorn_palace.model;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import lombok.Data;
+import jakarta.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.JoinColumn;
 
 
-
-
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
+@ToString(exclude = {"movie", "tickets"})
 public class Showtime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id", nullable = false)
     @NotNull(message = "Movie is required")
     private Movie movie;
@@ -39,6 +47,9 @@ public class Showtime {
 
     @NotNull(message = "Price is required")
     private Double price;
+
+    @OneToMany(mappedBy = "showtime", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Ticket> tickets = new ArrayList<>();
 
     public Showtime(Movie movie, String theater, Instant start_time, Instant end_time, Double price) {
         this.movie = movie;
